@@ -21,6 +21,9 @@ if (Deno.args[1]) {
     {
         switch (op)
         {
+            case "S":
+                routines.save_avatar();
+            break;
             case "i":
                 routines.info();
             break;

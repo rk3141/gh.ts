@@ -21,11 +21,15 @@ export function help() {
     console.log("-r: Lists repo");
     console.log("-s: Starred repos");
     console.log("-f: Iollowers");
-    console.log("-i: Info");
+    console.log("-i: Basic info");
+    console.log("-S: Save the avatar of the user (NOTE: this requires the \"--allow-write flag\")");
     console.log("");
     console.log("For example:");
     console.log("deno run --allow-net gh.ts anuraghazra -i");
-    console.log("This runs the command with all the options enabled");
+    console.log("This runs the command with the info option enabled");
+    console.log("");
+    console.log("deno run --allow-net gh.ts anuraghazra -S");
+    console.log("This save @anuraghazra's avatar");
 }
 
 export function misc() {
@@ -89,5 +93,18 @@ export async function followers() {
         console.log(fllers["login"]);
     }
     console.log("");
+}
+
+export async function save_avatar() {
+    var gh_username = json["login"]; // Name should be provided as the command line agruments
+    const resp = await fetch(`https://api.github.com/users/${gh_username}`); // Get the response
+    var json_resp = await (resp).json(); // Get the JSON
+
+    const avatar_url = json_resp["avatar_url"]; // The avatar is present on this link
+    const avatar_data = await fetch(avatar_url); // Fetch it from the URL
+    const data_blob = await (avatar_data).blob(); // Get the blob from data
+    const image_data = await(data_blob).stream().getReader().read(); // Read the data from the stream's blob
+    const value = image_data.value; // The actual value to be written to the file
+    Deno.writeFileSync(`${gh_username}.png`, value); // Writing it!!
 }
 // END
