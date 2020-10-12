@@ -1,0 +1,86 @@
+// Main working variables START:
+const url: string = "https://api.github.com/users/"+Deno.args[0];
+var resp = await fetch(url);
+var json = (await resp.json());
+// END
+
+// Utilities START:
+export function help() {
+    console.log("Welcome to gh.ts!");
+    console.log("Syntax:");
+    console.log("deno run --allow-net gh.ts <USERNAME> -<OPTIONS_GO_HERE>");
+    console.log("The Options:");
+    console.log("-a: Shows misc info");
+    console.log("-r: Lists repo");
+    console.log("-s: Starred repos");
+    console.log("-f: Iollowers");
+    console.log("-i: Info");
+    console.log("");
+    console.log("For example:");
+    console.log("deno run --allow-net gh.ts anuraghazra -arsfi");
+    console.log("This runs the command with all the options enabled");
+}
+
+export function misc() {
+    const company = json["company"];
+    const blog = json["blog"];
+    const twitter = json["twitter"];
+    const hireable = json["hireable"];
+    const email = json["email"];
+    const location = json["location"];
+    
+    if (company) {
+        console.log(json["name"],"works at",company);
+    }
+    if (blog) {
+        console.log(json["name"],"\b's blog is at",blog);
+    }
+    if (twitter) {
+        console.log(json["name"],"\b's twitter: ",twitter);
+    }
+    if (hireable) {
+        console.log(json["name"],"is hireable!");
+    }
+    if (email) {
+        console.log(json["name"],"'\b's email: ",email);
+    }
+    if (location) {
+        console.log(json["name"],"is located at/in",location);
+    }
+}
+
+export function info() {
+    console.log(`${json["name"]} a.k.a ${json["login"]}`);
+    console.log("Bio:",json["bio"]);
+}
+
+export async function repos() {
+    var resp = await fetch(url+"/repos");
+    
+    console.log("Repos: ");
+    for (var repo of (await resp.json())) {
+        console.log(repo["full_name"]);
+    }
+    console.log("");
+}
+
+export async function stars() {
+    var resp = await fetch(url+"/starred");
+    
+    console.log("Starred repos: ");
+    for (var star of (await resp.json())) {
+        console.log(star["full_name"]);
+    }
+    console.log("");
+}
+
+export async function followers() {
+    var resp = await fetch(url+"/followers");
+
+    console.log("Followers: ");
+    for (var fllers of (await resp.json())) {
+        console.log(fllers["login"]);
+    }
+    console.log("");
+}
+// END
