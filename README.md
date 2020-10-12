@@ -13,6 +13,6 @@ Then simply run the program:
 $ deno run --allow-net gh.ts anuraghazra -i
 ```
 
-### Adding a new property:
+### Adding a new feature:
 Add a charecter code for the option you are implementing to [`gh.ts` Line No. 22](https://github.com/rishit-khandelwal/gh.ts/blob/master/gh.ts#L22)
-and then add the function to execute to the `case` and implement it in `routines.ts` [like this example function](https://github.com/rishit-khandelwal/gh.ts/blob/master/gh.ts#L7)
+and then execute the function in the `case` and implement it in `routines.ts` [like this example function](https://github.com/rishit-khandelwal/gh.ts/blob/master/gh.ts#L7)
