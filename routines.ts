@@ -4,7 +4,14 @@ var resp = await fetch(url);
 var json = (await resp.json());
 // END
 
+// Example functions
+export function example_func()
+{
+    // CODE GOES HERE
+}
+
 // Utilities START:
+
 export function help() {
     console.log("Welcome to gh.ts!");
     console.log("Syntax:");
@@ -17,7 +24,7 @@ export function help() {
     console.log("-i: Info");
     console.log("");
     console.log("For example:");
-    console.log("deno run --allow-net gh.ts anuraghazra -arsfi");
+    console.log("deno run --allow-net gh.ts anuraghazra -i");
     console.log("This runs the command with all the options enabled");
 }
 
