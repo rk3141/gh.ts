@@ -29,7 +29,7 @@ export function help() {
     console.log("This runs the command with the info option enabled");
     console.log("");
     console.log("deno run --allow-net gh.ts anuraghazra -S");
-    console.log("This save @anuraghazra's avatar");
+    console.log("This saves @anuraghazra's avatar");
 }
 
 export function misc() {

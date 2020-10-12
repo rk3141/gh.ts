@@ -15,7 +15,7 @@ if (Deno.args[1]) {
 
     opts = opts.slice(1,opts.length);
     
-    var oparr: string[] = opts.split("");
+    var oparr: string[] = opts.split("").sort();
         
     for (let op of oparr)
     {
